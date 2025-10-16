@@ -5,10 +5,11 @@ export default async function handler(req, res) {
   const { sku } = req.body || {};
   return res.status(200).json({
     title: `Example Listing for ${sku}`,
-    description: "Mock AI description for your product. Replace this with real OpenAI results later.",
+    description:
+      "Mock AI description for your product. Replace this with real OpenAI results later.",
     category: "Apparel",
     condition: "Pre-owned",
     price: "25.00",
-    average: "28.00"
+    average: "28.00",
   });
 }
