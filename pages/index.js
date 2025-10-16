@@ -54,35 +54,46 @@ export default function Home() {
 
       <header className="px-6 py-4 border-b bg-white">
         <h1 className="text-2xl font-semibold">AI CrossList — Vision Workflow</h1>
-        <p className="text-sm text-gray-600">Upload images → AI extracts details → Ready draft</p>
+        <p className="text-sm text-gray-600">
+          Upload images → AI extracts details → Ready draft
+        </p>
       </header>
 
       <main className="max-w-6xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Upload */}
+        {/* 1) Upload */}
         <section className="bg-white rounded-xl shadow p-4">
           <h2 className="font-semibold mb-3">1) Upload Photos</h2>
           <input type="file" accept="image/*" multiple onChange={handleUpload} />
           {previews.length > 0 && (
             <div className="mt-3 grid grid-cols-4 sm:grid-cols-6 gap-2">
               {previews.map((src, i) => (
-                <img key={i} src={src} className="w-full h-24 object-cover rounded border" alt={`img${i}`} />
+                <img
+                  key={i}
+                  src={src}
+                  className="w-full h-24 object-cover rounded border"
+                  alt={`img${i}`}
+                />
               ))}
             </div>
           )}
           <div className="mt-4">
             <label className="text-sm text-gray-600">SKU</label>
-            <input value={sku} onChange={e=>setSku(e.target.value)} className="mt-1 w-full border rounded px-2 py-1" />
+            <input
+              value={sku}
+              onChange={(e) => setSku(e.target.value)}
+              className="mt-1 w-full border rounded px-2 py-1"
+            />
           </div>
           <button
             onClick={generateDraft}
-            disabled={loading || files.length===0}
+            disabled={loading || files.length === 0}
             className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white rounded px-3 py-2"
           >
             {loading ? "Generating..." : "Generate Listing (Mock)"}
           </button>
         </section>
 
-        {/* AI Draft */}
+        {/* 2) AI Draft */}
         <section className="bg-white rounded-xl shadow p-4">
           <h2 className="font-semibold mb-3">2) AI Draft</h2>
           {!aiDraft ? (
@@ -91,25 +102,37 @@ export default function Home() {
             <div className="space-y-3">
               <div>
                 <label className="text-sm text-gray-600">SEO Title</label>
-                <input className="mt-1 w-full border rounded px-2 py-1"
+                <input
+                  className="mt-1 w-full border rounded px-2 py-1"
                   value={aiDraft.title}
-                  onChange={e => setAiDraft({ ...aiDraft, title: e.target.value })} />
+                  onChange={(e) =>
+                    setAiDraft({ ...aiDraft, title: e.target.value })
+                  }
+                />
               </div>
               <div>
                 <label className="text-sm text-gray-600">Description</label>
-                <textarea rows={8} className="mt-1 w-full border rounded px-2 py-1"
+                <textarea
+                  rows={8}
+                  className="mt-1 w-full border rounded px-2 py-1"
                   value={aiDraft.description}
-                  onChange={e => setAiDraft({ ...aiDraft, description: e.target.value })} />
+                  onChange={(e) =>
+                    setAiDraft({ ...aiDraft, description: e.target.value })
+                  }
+                />
               </div>
             </div>
           )}
         </section>
 
-        {/* Save */}
+        {/* 3) Save */}
         <section className="bg-white rounded-xl shadow p-4">
           <h2 className="font-semibold mb-3">3) Save Draft</h2>
-          <button onClick={saveDraft} disabled={!aiDraft}
-            className="w-full bg-green-600 hover:bg-green-700 text-white rounded px-3 py-2">
+          <button
+            onClick={saveDraft}
+            disabled={!aiDraft}
+            className="w-full bg-green-600 hover:bg-green-700 text-white rounded px-3 py-2"
+          >
             Save Draft
           </button>
         </section>
